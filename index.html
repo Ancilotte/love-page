@@ -2,10 +2,10 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Love Starfield</title>
+  <title>Люблю тебя</title>
 
-  <!-- Beautiful fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Raleway:wght@300;600&family=Playfair+Display:wght@400;700&family=Parisienne&family=Poppins:wght@300;600&family=Lobster&family=Noto+Sans+JP:wght@500&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet">
+  <!-- Шрифты -->
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Raleway:wght@300;600&family=Playfair+Display:wght@400;700&family=Parisienne&family=Poppins:wght@300;600&family=Lobster&family=Noto+Sans+JP:wght@500&family=Noto+Serif+SC:wght@500&family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -13,79 +13,207 @@
       height: 100vh;
       width: 100vw;
       overflow: hidden;
-      font-weight: 400;
-      background: radial-gradient(circle at top, #fde4f0 0, #fff 45%, #e8f3ff 100%);
+      background: radial-gradient(circle at top, #fde4f0 0, #ffffff 45%, #e8f3ff 100%);
       position: relative;
+      font-weight: 400;
     }
 
     .phrase {
       position: absolute;
       white-space: nowrap;
       opacity: 0;
-      animation: fadeIn 3s ease-out forwards;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.18);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.20);
+      transform-origin: center center;
+      animation-name: fadeIn;
+      animation-fill-mode: forwards;
+      /* duration и delay задаём через JS, чтобы рандомить */
     }
 
     @keyframes fadeIn {
-      0%   { opacity: 0; transform: translateY(30px) scale(0.95); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
+      0% {
+        opacity: 0;
+        transform: translateY(32px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
   </style>
 </head>
-
 <body>
 
 <script>
-const phrases = [
-  ["Я люблю тебя", "PT Serif"],
-  ["I love you", "Playfair Display"],
-  ["Es tevi mīlu", "Raleway"],
-  ["Seni seviyorum", "Poppins"],
+  // Список фраз: текст + шрифт + флаг "главная" (чуть чаще – побольше и ближе к центру)
+  const phrases = [
+    // Главные (твои)
+    { text: "Я люблю тебя", font: "'PT Serif', serif", main: true },
+    { text: "I love you", font: "'Playfair Display', serif", main: true },
+    { text: "Es tevi mīlu", font: "'Raleway', sans-serif", main: true },
+    { text: "Seni seviyorum", font: "'Poppins', sans-serif", main: true },
 
-  ["Je t’aime", "Parisienne"],
-  ["Ti amo", "Cormorant Garamond"],
-  ["Te amo", "Lobster"],
-  ["Ich liebe dich", "Raleway"],
-  ["Я тебе кохаю", "PT Serif"],
-  ["愛してる", "Noto Sans JP"],
-  ["أنا أحبك", "Playfair Display"],
-  ["אני אוהב אותך", "Playfair Display"],
-  ["Eu te amo", "Raleway"],
-  ["Mahal kita", "Raleway"],
-  ["Kocham cię", "Poppins"],
-  ["Seni sevirem", "Poppins"],
-  ["S'agapó", "Playfair Display"],
-  ["Ti voglio bene", "Cormorant Garamond"],
-  ["Jag älskar dig", "Raleway"],
-];
+    // Ещё языки
+    { text: "Je t’aime", font: "'Parisienne', cursive" },           // French
+    { text: "Te amo", font: "'Lobster', cursive" },                 // Spanish
+    { text: "Ti amo", font: "'Cormorant Garamond', serif" },        // Italian
+    { text: "Ich liebe dich", font: "'Raleway', sans-serif" },      // German
+    { text: "Kocham cię", font: "'Poppins', sans-serif" },          // Polish
+    { text: "Я тебе кохаю", font: "'PT Serif', serif" },            // Ukrainian
+    { text: "Mahal kita", font: "'Raleway', sans-serif" },          // Filipino
+    { text: "Eu te amo", font: "'Raleway', sans-serif" },           // Portuguese
+    { text: "Eu te amo", font: "'Raleway', sans-serif" },           // Brazilian Portuguese
+    { text: "S’agapó", font: "'Playfair Display', serif" },         // Greek
+    { text: "Seni sevirem", font: "'Poppins', sans-serif" },        // Azerbaijani
+    { text: "Jag älskar dig", font: "'Raleway', sans-serif" },      // Swedish
+    { text: "Jeg elsker deg", font: "'Raleway', sans-serif" },      // Norwegian
+    { text: "Jeg elsker dig", font: "'Raleway', sans-serif" },      // Danish
+    { text: "Ik hou van jou", font: "'Raleway', sans-serif" },      // Dutch
+    { text: "Te iubesc", font: "'Playfair Display', serif" },       // Romanian
+    { text: "Szeretlek", font: "'Playfair Display', serif" },       // Hungarian
+    { text: "Volim te", font: "'PT Serif', serif" },                // Serbian / Croatian
+    { text: "მე შენ მიყვარხარ", font: "'Noto Serif SC', serif" },   // Georgian (шрифт просто как юникодный)
+    { text: "Люблю тябе", font: "'PT Serif', serif" },              // Belarussian variant
+    { text: "愛してる", font: "'Noto Sans JP', sans-serif" },       // Japanese
+    { text: "我爱你", font: "'Noto Serif SC', serif" },             // Chinese
+    { text: "أنا أحبك", font: "'Playfair Display', serif" },        // Arabic
+    { text: "אני אוהב אותך", font: "'Playfair Display', serif" },  // Hebrew
+    { text: "मैं तुमसे प्यार करता हूँ", font: "'Noto Serif SC', serif" }, // Hindi (мужской)
+    { text: "사랑해", font: "'Noto Sans JP', sans-serif" },         // Korean (шрифт просто юникод)
+    { text: "Te quiero", font: "'Lobster', cursive" },              // Spanish alt
+  ];
 
-const sizes = [24, 28, 32, 36, 40, 46, 52]; // 7 sizes
+  // 7 базовых размеров в px (потом масштабируем под экран)
+  const baseSizes = [26, 32, 38, 46, 54, 66, 80];
 
-phrases.forEach(([text, font]) => {
-  const el = document.createElement("div");
-  el.className = "phrase";
-  el.innerText = text;
-  el.style.fontFamily = font;
+  // Массив занятых прямоугольников для проверки пересечений
+  const placed = [];
 
-  // RANDOM SIZE
-  const size = sizes[Math.floor(Math.random() * sizes.length)];
-  el.style.fontSize = size + "px";
+  function rectsOverlap(r1, r2, margin) {
+    return !(
+      r1.x + r1.w + margin < r2.x ||
+      r2.x + r2.w + margin < r1.x ||
+      r1.y + r1.h + margin < r2.y ||
+      r2.y + r2.h + margin < r1.y
+    );
+  }
 
-  // RANDOM POSITION BUT INSIDE SCREEN SAFELY
-  const maxX = window.innerWidth - size * text.length * 0.6;
-  const maxY = window.innerHeight - size * 1.2;
+  function canPlace(newRect, margin) {
+    for (const r of placed) {
+      if (rectsOverlap(newRect, r, margin)) return false;
+    }
+    return true;
+  }
 
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
+  function createField() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
 
-  el.style.left = x + "px";
-  el.style.top = y + "px";
+    // Масштаб под маленькие экраны (телефон)
+    const scale = Math.min(vw / 1600, vh / 900, 1); // <=1
 
-  // RANDOM ANIMATION DELAY
-  el.style.animationDelay = (Math.random() * 1.8).toFixed(2) + "s";
+    phrases.forEach((phraseObj, index) => {
+      const el = document.createElement("div");
+      el.className = "phrase";
+      el.textContent = phraseObj.text;
+      el.style.fontFamily = phraseObj.font;
 
-  document.body.appendChild(el);
-});
+      // Выбор размера
+      let sizeIndex;
+      if (phraseObj.main) {
+        // Главное — чаще крупнее
+        sizeIndex = Math.floor(Math.random() * 3) + 4; // от 4 до 6 (54–80)
+      } else {
+        sizeIndex = Math.floor(Math.random() * baseSizes.length);
+      }
+      let fontSize = baseSizes[sizeIndex] * (scale > 0 ? scale : 0.6);
+      // Чуть поддуем большие ещё
+      if (phraseObj.main) fontSize *= 1.1;
+
+      el.style.fontSize = fontSize + "px";
+
+      // Временно добавляем за экран, чтобы измерить размер
+      el.style.left = "-9999px";
+      el.style.top = "-9999px";
+      document.body.appendChild(el);
+      const rect = el.getBoundingClientRect();
+      let w = rect.width;
+      let h = rect.height;
+
+      const margin = 10 * (scale > 0.6 ? scale : 0.6); // запас между надписями
+
+      // Пытаемся подобрать позицию
+      let attempts = 0;
+      let placedOK = false;
+      let x, y;
+
+      while (attempts < 200 && !placedOK) {
+        // Для главных — чуть чаще ближе к центру
+        const centerBias = phraseObj.main && Math.random() < 0.8;
+
+        let minX = margin;
+        let maxX = vw - w - margin;
+        let minY = margin;
+        let maxY = vh - h - margin;
+
+        if (centerBias) {
+          const cxMin = vw * 0.2;
+          const cxMax = vw * 0.8 - w;
+          const cyMin = vh * 0.25;
+          const cyMax = vh * 0.75 - h;
+          minX = Math.max(minX, cxMin);
+          maxX = Math.min(maxX, cxMax);
+          minY = Math.max(minY, cyMin);
+          maxY = Math.min(maxY, cyMax);
+        }
+
+        if (maxX <= minX || maxY <= minY) {
+          // Слишком тесно — уменьшаем размер и пробуем снова
+          fontSize *= 0.9;
+          el.style.fontSize = fontSize + "px";
+          const r2 = el.getBoundingClientRect();
+          w = r2.width;
+          h = r2.height;
+          attempts++;
+          continue;
+        }
+
+        x = minX + Math.random() * (maxX - minX);
+        y = minY + Math.random() * (maxY - minY);
+
+        const newRect = { x, y, w, h };
+        if (canPlace(newRect, margin)) {
+          placed.push(newRect);
+          placedOK = true;
+        } else {
+          attempts++;
+        }
+      }
+
+      if (!placedOK) {
+        // Если вообще не нашли место — убираем элемент
+        document.body.removeChild(el);
+        return;
+      }
+
+      el.style.left = x + "px";
+      el.style.top = y + "px";
+
+      // Рандомная длительность и задержка анимации
+      const duration = 3.2 + Math.random() * 1.6; // 3.2–4.8 сек
+      const delay = Math.random() * 2.2;          // 0–2.2 сек
+      el.style.animationDuration = duration + "s";
+      el.style.animationDelay = delay + "s";
+    });
+  }
+
+  createField();
+
+  // (Опционально) если хочешь при ресайзе всё перерисовывать — можно раскомментировать:
+  // window.addEventListener("resize", () => {
+  //   document.body.querySelectorAll(".phrase").forEach(el => el.remove());
+  //   placed.length = 0;
+  //   createField();
+  // });
 </script>
 
 </body>
