@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <title>Люблю тебя</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&family=Raleway:wght@700&family=Playfair+Display:wght@700&family=Parisienne&family=Poppins:wght@700&family=Cormorant+Garamond:wght:700&family=Lobster&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&family=Raleway:wght@700&family=Playfair+Display:wght@700&family=Parisienne&family=Poppins:wght@700&family=Cormorant+Garamond:wght@700&family=Lobster&family=Noto+Sans+JP:wght@700&family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -20,15 +21,22 @@
     .phrase {
       position: absolute;
       white-space: nowrap;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      opacity: 0.7; /* мягкий прозрачный эффект */
-      font-weight: 700; /* жирность */
+      text-shadow: 0px 2px 8px rgba(0,0,0,0.25);
+      opacity: 0;
+      animation: fadeIn 1.4s ease-out forwards;
     }
 
-    /* Центр — важные языки */
-    .center {
-      font-size: 56px;
+    @keyframes fadeIn {
+      0%   { opacity: 0; transform: translateY(20px) scale(0.97); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ======== Главные четыре языка (вариант D — плотная группа рядом с центром) ======== */
+    .main {
+      font-size: 54px;
       opacity: 1;
+      font-weight: 700;
+      animation-delay: 0.2s;
     }
 
     .ru {
@@ -38,118 +46,83 @@
       transform: translate(-50%, -50%);
     }
 
-    .tr {
-      font-family: "Poppins", sans-serif;
-      top: 58%;
-      left: 52%;
-      transform: translate(-50%, -50%);
-    }
-
     .lv {
       font-family: "Raleway", sans-serif;
-      top: 42%;
+      top: 41%;
       left: 48%;
       transform: translate(-50%, -50%);
-      letter-spacing: 0.05em;
     }
 
     .en {
       font-family: "Playfair Display", serif;
-      top: 36%;
+      top: 53%;
       left: 52%;
       transform: translate(-50%, -50%);
     }
 
-    /* Маленькие фразы по бокам */
+    .tr {
+      font-family: "Poppins", sans-serif;
+      top: 58%;
+      left: 46%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* ======== Маленькие языки вокруг ======== */
     .small {
       font-size: 26px;
-      opacity: 0.5;
+      opacity: 0.55;
     }
 
-    .fr {
-      font-family: "Parisienne", cursive;
-      top: 12%;
-      left: 18%;
-    }
+    .p1  { font-family: "Parisienne"; top:10%; left:12%; animation-delay:0.3s; }
+    .p2  { font-family: "Cormorant Garamond"; top:15%; right:10%; animation-delay:0.4s; }
+    .p3  { font-family: "Lobster"; bottom:10%; left:16%; animation-delay:0.35s; }
+    .p4  { font-family: "Raleway"; top:68%; left:18%; animation-delay:0.5s; }
+    .p5  { font-family: "PT Serif"; top:72%; right:18%; animation-delay:0.45s; }
+    .p6  { font-family: "Raleway"; top:28%; left:72%; animation-delay:0.55s; }
+    .p7  { font-family: "Noto Sans JP"; bottom:16%; left:72%; animation-delay:0.5s; }
+    .p8  { font-family: "Playfair Display"; bottom:10%; right:50%; animation-delay:0.6s; }
+    .p9  { font-family: "Playfair Display"; top:34%; right:38%; animation-delay:0.65s; }
+    .p10 { font-family: "Poppins"; top:23%; left:28%; animation-delay:0.45s; }
 
-    .it {
-      font-family: "Cormorant Garamond", serif;
-      top: 14%;
-      right: 14%;
-    }
+    /* Дополнительные языки */
+    .p11 { top:82%; left:40%; animation-delay:0.7s; }
+    .p12 { top:20%; right:22%; animation-delay:0.8s; }
+    .p13 { bottom:25%; left:25%; animation-delay:0.75s; }
+    .p14 { top:32%; left:10%; animation-delay:0.9s; }
+    .p15 { bottom:30%; right:18%; animation-delay:1.0s; }
 
-    .es {
-      font-family: "Lobster", cursive;
-      bottom: 12%;
-      left: 10%;
-    }
-
-    .de {
-      font-family: "Raleway", sans-serif;
-      bottom: 18%;
-      right: 8%;
-    }
-
-    .pl {
-      font-family: "Poppins", sans-serif;
-      top: 70%;
-      left: 20%;
-    }
-
-    .ua {
-      font-family: "PT Serif", serif;
-      top: 72%;
-      right: 16%;
-    }
-
-    .se {
-      font-family: "Raleway", sans-serif;
-      top: 22%;
-      left: 62%;
-    }
-
-    .jp {
-      font-family: "Poppins", sans-serif;
-      bottom: 20%;
-      left: 60%;
-    }
-
-    .ar {
-      font-family: "Playfair Display", serif;
-      bottom: 10%;
-      right: 40%;
-    }
-
-    .he {
-      font-family: "Playfair Display", serif;
-      top: 30%;
-      right: 30%;
-    }
-
-    /* Приведение к адаптивности */
+    /* Адаптивность */
     @media (max-width: 600px) {
-      .center { font-size: 34px; }
+      .main { font-size: 34px; }
       .small { font-size: 18px; }
     }
   </style>
 </head>
-<body>
-  <!-- Центр -->
-  <div class="phrase center ru">Я люблю тебя</div>
-  <div class="phrase center tr">Seni seviyorum</div>
-  <div class="phrase center lv">Es tevi mīlu</div>
-  <div class="phrase center en">I love you</div>
 
-  <!-- Маленькие языки вокруг -->
-  <div class="phrase small fr">Je t'aime</div>
-  <div class="phrase small it">Ti amo</div>
-  <div class="phrase small es">Te amo</div>
-  <div class="phrase small de">Ich liebe dich</div>
-  <div class="phrase small pl">Kocham cię</div>
-  <div class="phrase small ua">Я тебе кохаю</div>
-  <div class="phrase small se">Jag älskar dig</div>
-  <div class="phrase small jp">愛してる</div>
-  <div class="phrase small ar">أحبك</div>
-  <div class="phrase small he">אני אוהב אותך</div>
+<body>
+
+  <!-- Главные 4 языка (рядом с центром) -->
+  <div class="phrase main ru">Я люблю тебя</div>
+  <div class="phrase main lv">Es tevi mīlu</div>
+  <div class="phrase main en">I love you</div>
+  <div class="phrase main tr">Seni seviyorum</div>
+
+  <!-- Дополнительные языки -->
+  <div class="phrase small p1">Je t’aime</div>                    <!-- French -->
+  <div class="phrase small p2">Ti amo</div>                        <!-- Italian -->
+  <div class="phrase small p3">Te amo</div>                        <!-- Spanish -->
+  <div class="phrase small p4">Kocham cię</div>                    <!-- Polish -->
+  <div class="phrase small p5">Я тебе кохаю</div>                  <!-- Ukrainian -->
+  <div class="phrase small p6">Jag älskar dig</div>                <!-- Swedish -->
+  <div class="phrase small p7">愛してる</div>                       <!-- Japanese -->
+  <div class="phrase small p8">أحبك</div>                          <!-- Arabic -->
+  <div class="phrase small p9">אני אוהב אותך</div>                <!-- Hebrew -->
+  <div class="phrase small p10">Ich liebe dich</div>               <!-- German -->
+  <div class="phrase small p11">Ti voglio bene</div>               <!-- Italian alt -->
+  <div class="phrase small p12">Eu te amo</div>                    <!-- Portuguese -->
+  <div class="phrase small p13">S’agapó</div>                      <!-- Greek -->
+  <div class="phrase small p14">Mahal kita</div>                   <!-- Filipino -->
+  <div class="phrase small p15">Seni sevirem</div>                 <!-- Azerbaijani -->
+
 </body>
 </html>
