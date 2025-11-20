@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Люблю тебя</title>
+
+  <!-- Шрифты Google -->
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&family=Raleway:wght@500;700&family=Playfair+Display:wght@700&family=Parisienne&family=Poppins:wght@600&family=Cormorant+Garamond:wght@700&family=Lobster&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #ffe5f0 0, #fff 45%, #e8f3ff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .phrase {
+      position: absolute;
+      color: #1e1e1e;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.18);
+      white-space: nowrap;
+    }
+
+    /* Русский */
+    .ru {
+      font-family: "PT Serif", serif;
+      font-size: 54px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-2deg);
+    }
+
+    /* Латышский */
+    .lv {
+      font-family: "Raleway", sans-serif;
+      font-size: 32px;
+      top: 16%;
+      left: 10%;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Английский */
+    .en {
+      font-family: "Playfair Display", serif;
+      font-size: 44px;
+      bottom: 12%;
+      right: 8%;
+      letter-spacing: 0.04em;
+    }
+
+    /* Французский — более романтичный рукописный стиль */
+    .fr {
+      font-family: "Parisienne", cursive;
+      font-size: 56px;
+      top: 10%;
+      right: 12%;
+    }
+
+    /* Турецкий */
+    .tr {
+      font-family: "Poppins", sans-serif;
+      font-size: 38px;
+      bottom: 18%;
+      left: 12%;
+      letter-spacing: 0.05em;
+    }
+
+    /* Итальянский */
+    .it {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 46px;
+      top: 64%;
+      left: 64%;
+      transform: rotate(4deg);
+    }
+
+    /* Испанский / мексиканский вариант */
+    .es {
+      font-family: "Lobster", cursive;
+      font-size: 50px;
+      top: 32%;
+      left: 62%;
+      transform: rotate(-6deg);
+    }
+
+    /* Чуть более бледные “эхо”-копии некоторых фраз */
+    .ghost {
+      opacity: 0.18;
+      text-shadow: none;
+    }
+
+    .ru-ghost {
+      font-family: "PT Serif", serif;
+      font-size: 90px;
+      top: -8%;
+      left: -5%;
+      transform: rotate(-12deg);
+    }
+
+    .en-ghost {
+      font-family: "Playfair Display", serif;
+      font-size: 86px;
+      bottom: -10%;
+      right: -2%;
+      transform: rotate(8deg);
+    }
+
+    /* Немного анимации появления */
+    .phrase {
+      opacity: 0;
+      animation: fadeInUp 1.6s ease-out forwards;
+    }
+
+    .lv { animation-delay: 0.1s; }
+    .fr { animation-delay: 0.25s; }
+    .tr { animation-delay: 0.4s; }
+    .it { animation-delay: 0.55s; }
+    .es { animation-delay: 0.7s; }
+    .ru { animation-delay: 0.9s; }
+    .ghost { animation-delay: 1.0s; }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .ru { font-size: 34px; }
+      .lv { font-size: 22px; }
+      .en { font-size: 28px; }
+      .fr { font-size: 32px; }
+      .tr { font-size: 26px; }
+      .it { font-size: 30px; }
+      .es { font-size: 32px; }
+      .ghost { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Русский -->
+  <div class="phrase ru">Я люблю тебя</div>
+
+  <!-- Латышский -->
+  <div class="phrase lv">Es tevi mīlu</div>
+
+  <!-- Английский -->
+  <div class="phrase en">I love you</div>
+
+  <!-- Французский -->
+  <div class="phrase fr">Je t'aime</div>
+
+  <!-- Турецкий -->
+  <div class="phrase tr">Seni seviyorum</div>
+
+  <!-- Итальянский -->
+  <div class="phrase it">Ti amo</div>
+
+  <!-- Испанский / мексиканский -->
+  <div class="phrase es">Te amo</div>
+
+  <!-- “Эхо” -->
+  <div class="phrase ghost ru-ghost">Я люблю тебя</div>
+  <div class="phrase ghost en-ghost">I love you</div>
+</body>
+</html>
